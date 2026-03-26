@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zorian Halan — Health Tech Consulting</title>
+    <meta name="description" content="Zorian Halan — Healthcare IT consultant bridging clinical expertise and technology for health tech projects across the US, EU, and Hong Kong.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --black: #0a0a0a;
+            --gray-950: #111113;
+            --gray-900: #18181b;
+            --gray-800: #27272a;
+            --gray-700: #3f3f46;
+            --gray-600: #52525b;
+            --gray-500: #71717a;
+            --gray-400: #a1a1aa;
+            --gray-300: #d4d4d8;
+            --gray-200: #e4e4e7;
+            --gray-100: #f4f4f5;
+            --white: #fafafa;
+            --accent: #6366f1;
+            --accent-light: #818cf8;
+            --accent-glow: rgba(99,102,241,0.15);
+            --green: #22c55e;
+            --green-glow: rgba(34,197,94,0.12);
+            --cyan: #06b6d4;
+            --radius: 16px;
+            --radius-sm: 10px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', -apple-system, sans-serif;
+            color: var(--gray-300);
+            background: var(--black);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        h1, h2, h3, h4, h5 { font-family: 'Space Grotesk', sans-serif; }
+
+        ::selection { background: var(--accent); color: white; }
+
+        /* NAV */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+            background: rgba(10,10,10,0.8);
+            backdrop-filter: blur(20px) saturate(1.4);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .nav-inner {
+            max-width: 1200px; margin: 0 auto; padding: 0 32px;
+            display: flex; align-items: center; justify-content: space-between; height: 72px;
+        }
+        .nav-logo {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.1rem; font-weight: 700; color: var(--white);
+            text-decoration: none; letter-spacing: -0.02em;
+        }
+        .nav-logo span { color: var(--accent); }
+        .nav-links { display: flex; gap: 36px; list-style: none; }
+        .nav-links a {
+            text-decoration: none; color: var(--gray-500); font-size: 0.85rem;
+            font-weight: 500; transition: color 0.2s; letter-spacing: 0.01em;
+        }
+        .nav-links a:hover { color: var(--white); }
+        .nav-cta {
+            background: var(--accent); color: white !important; padding: 8px 20px;
+            border-radius: 8px; font-weight: 600; transition: all 0.2s;
+        }
+        .nav-cta:hover { background: var(--accent-light); transform: translateY(-1px); }
+        .nav-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
+        .nav-toggle span { display: block; width: 20px; height: 1.5px; background: var(--gray-400); margin: 5px 0; transition: all 0.3s; }
+
+        /* HERO */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center;
+            position: relative; overflow: hidden;
+            padding: 120px 32px 80px;
+        }
+        .hero-bg {
+            position: absolute; inset: 0; z-index: 0;
+        }
+        .hero-bg .grid-overlay {
+            position: absolute; inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 64px 64px;
+        }
+        .hero-bg .glow-1 {
+            position: absolute; top: -200px; right: -100px;
+            width: 700px; height: 700px;
+            background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-bg .glow-2 {
+            position: absolute; bottom: -200px; left: -100px;
+            width: 500px; height: 500px;
+            background: radial-gradient(circle, rgba(6,182,212,0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .hero-inner {
+            max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; width: 100%;
+        }
+        .hero-badge {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 100px; padding: 6px 16px 6px 8px;
+            margin-bottom: 32px; font-size: 0.82rem; color: var(--gray-400);
+        }
+        .hero-badge .dot {
+            width: 8px; height: 8px; background: var(--green); border-radius: 50%;
+            box-shadow: 0 0 8px var(--green);
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .hero h1 {
+            font-size: clamp(2.8rem, 6vw, 4.8rem);
+            font-weight: 700; color: var(--white);
+            line-height: 1.05; letter-spacing: -0.03em;
+            margin-bottom: 24px; max-width: 900px;
+        }
+        .hero h1 .gradient {
+            background: linear-gradient(135deg, var(--accent-light), var(--cyan));
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-sub {
+            font-size: 1.15rem; color: var(--gray-400);
+            max-width: 620px; line-height: 1.8; margin-bottom: 48px;
+        }
+        .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 80px; }
+        .btn {
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 14px 28px; border-radius: var(--radius-sm);
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600; font-size: 0.95rem;
+            text-decoration: none; transition: all 0.25s; border: none; cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--accent); color: white;
+            box-shadow: 0 0 24px var(--accent-glow);
+        }
+        .btn-primary:hover { background: var(--accent-light); transform: translateY(-2px); box-shadow: 0 8px 32px var(--accent-glow); }
+        .btn-ghost {
+            background: transparent; color: var(--gray-300);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-ghost:hover { border-color: rgba(255,255,255,0.25); color: var(--white); }
+        .hero-metrics {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+            background: rgba(255,255,255,0.05); border-radius: var(--radius);
+            overflow: hidden; max-width: 800px;
+        }
+        .metric {
+            background: var(--black); padding: 28px 24px;
+        }
+        .metric-value {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem; font-weight: 700; color: var(--white);
+            letter-spacing: -0.02em; margin-bottom: 4px;
+        }
+        .metric-label { font-size: 0.8rem; color: var(--gray-500); letter-spacing: 0.04em; }
+
+        /* SECTIONS */
+        section { padding: 120px 32px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .section-tag {
+            display: inline-flex; align-items: center; gap: 8px;
+            font-size: 0.75rem; font-weight: 600; color: var(--accent-light);
+            text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 16px;
+        }
+        .section-tag::before {
+            content: ''; width: 12px; height: 1px; background: var(--accent);
+        }
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700; color: var(--white);
+            letter-spacing: -0.02em; margin-bottom: 16px; line-height: 1.1;
+        }
+        .section-desc {
+            font-size: 1.05rem; color: var(--gray-400);
+            max-width: 560px; line-height: 1.8; margin-bottom: 64px;
+        }
+
+        /* MARKETS */
+        .markets { border-top: 1px solid rgba(255,255,255,0.05); }
+        .markets-header { margin-bottom: 64px; }
+        .markets-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+        .market-card {
+            background: var(--gray-950); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius); padding: 36px 28px;
+            transition: all 0.3s; position: relative; overflow: hidden;
+        }
+        .market-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            opacity: 0; transition: opacity 0.3s;
+        }
+        .market-card:hover { border-color: rgba(99,102,241,0.2); transform: translateY(-4px); }
+        .market-card:hover::before { opacity: 1; }
+        .market-flag { font-size: 2rem; margin-bottom: 16px; }
+        .market-card h3 {
+            font-size: 1.15rem; font-weight: 600; color: var(--white); margin-bottom: 8px;
+        }
+        .market-card p { font-size: 0.9rem; color: var(--gray-500); line-height: 1.7; margin-bottom: 16px; }
+        .market-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+        .market-tags span {
+            font-size: 0.72rem; padding: 4px 10px; border-radius: 100px;
+            background: rgba(255,255,255,0.04); color: var(--gray-400);
+            border: 1px solid rgba(255,255,255,0.06);
+        }
+
+        /* SERVICES */
+        .services { border-top: 1px solid rgba(255,255,255,0.05); }
+        .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+        .service-card {
+            background: var(--gray-950); border: 1px solid rgba(255,255,255,0.05);
+            border-radius: var(--radius); padding: 36px 32px;
+            transition: all 0.3s; position: relative;
+        }
+        .service-card:hover { border-color: rgba(99,102,241,0.15); }
+        .service-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.75rem; font-weight: 600; color: var(--accent);
+            margin-bottom: 20px; letter-spacing: 0.06em;
+        }
+        .service-card h3 {
+            font-size: 1.2rem; font-weight: 600; color: var(--white);
+            margin-bottom: 12px; letter-spacing: -0.01em;
+        }
+        .service-card p { font-size: 0.9rem; color: var(--gray-500); line-height: 1.7; }
+        .service-card .service-stack {
+            display: flex; flex-wrap: wrap; gap: 6px; margin-top: 20px;
+            padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.05);
+        }
+        .service-card .service-stack span {
+            font-size: 0.72rem; padding: 4px 10px; border-radius: 6px;
+            background: var(--accent-glow); color: var(--accent-light);
+        }
+
+        /* APPROACH */
+        .approach { border-top: 1px solid rgba(255,255,255,0.05); }
+        .approach-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.05); border-radius: var(--radius); overflow: hidden; }
+        .approach-item { background: var(--black); padding: 48px 32px; }
+        .approach-num {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 3rem; font-weight: 700; color: rgba(255,255,255,0.06);
+            margin-bottom: 16px; line-height: 1;
+        }
+        .approach-item h3 { font-size: 1.05rem; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+        .approach-item p { font-size: 0.88rem; color: var(--gray-500); line-height: 1.7; }
+
+        /* EXPERIENCE */
+        .experience { border-top: 1px solid rgba(255,255,255,0.05); }
+        .exp-list { max-width: 800px; }
+        .exp-item {
+            display: grid; grid-template-columns: 160px 1fr; gap: 32px;
+            padding: 28px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+        }
+        .exp-item:last-child { border-bottom: none; }
+        .exp-date { font-size: 0.82rem; color: var(--gray-500); font-weight: 500; padding-top: 4px; }
+        .exp-date .current {
+            display: inline-flex; align-items: center; gap: 6px;
+            color: var(--green); font-size: 0.72rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px;
+        }
+        .exp-date .current::before {
+            content: ''; width: 5px; height: 5px; background: var(--green);
+            border-radius: 50%; box-shadow: 0 0 6px var(--green);
+        }
+        .exp-content h3 { font-size: 1.05rem; font-weight: 600; color: var(--white); margin-bottom: 4px; }
+        .exp-content .org { font-size: 0.88rem; color: var(--gray-500); margin-bottom: 8px; }
+        .exp-content p { font-size: 0.88rem; color: var(--gray-500); line-height: 1.7; }
+
+        /* CONTACT */
+        .contact { border-top: 1px solid rgba(255,255,255,0.05); }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
+        .contact-info p { font-size: 1rem; color: var(--gray-400); line-height: 1.8; margin-bottom: 36px; }
+        .contact-links { list-style: none; display: grid; gap: 16px; }
+        .contact-links li { display: flex; align-items: center; gap: 14px; }
+        .contact-links .icon {
+            width: 40px; height: 40px; border-radius: var(--radius-sm);
+            background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06);
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0; color: var(--gray-400); font-size: 0.95rem;
+        }
+        .contact-links .text { font-size: 0.92rem; color: var(--gray-300); }
+        .contact-links a { color: var(--accent-light); text-decoration: none; }
+        .contact-links a:hover { text-decoration: underline; }
+        .legal-block {
+            margin-top: 40px; padding: 24px; border-radius: var(--radius-sm);
+            background: rgba(255,255,255,0.02); border: 1px solid rgba(255,255,255,0.05);
+        }
+        .legal-block h4 {
+            font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em;
+            color: var(--gray-600); margin-bottom: 10px; font-weight: 600;
+        }
+        .legal-block p { font-size: 0.82rem; color: var(--gray-500); line-height: 1.7; }
+
+        .contact-form { display: grid; gap: 16px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .form-group label {
+            display: block; font-size: 0.75rem; font-weight: 600;
+            color: var(--gray-500); margin-bottom: 6px;
+            text-transform: uppercase; letter-spacing: 0.06em;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%; padding: 12px 16px;
+            background: var(--gray-950); border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius-sm); color: var(--white);
+            font-family: inherit; font-size: 0.92rem; transition: all 0.2s;
+        }
+        .form-group input::placeholder,
+        .form-group textarea::placeholder { color: var(--gray-600); }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none; border-color: var(--accent);
+            box-shadow: 0 0 0 3px var(--accent-glow);
+        }
+        .form-group textarea { resize: vertical; min-height: 110px; }
+        .submit-btn {
+            background: var(--accent); color: white; border: none;
+            padding: 14px 28px; border-radius: var(--radius-sm);
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.92rem; font-weight: 600; cursor: pointer;
+            transition: all 0.25s; width: 100%;
+        }
+        .submit-btn:hover { background: var(--accent-light); transform: translateY(-1px); box-shadow: 0 6px 24px var(--accent-glow); }
+
+        /* FOOTER */
+        footer {
+            border-top: 1px solid rgba(255,255,255,0.05);
+            padding: 40px 32px; text-align: center;
+        }
+        footer p { font-size: 0.8rem; color: var(--gray-600); }
+
+        /* ANIMATIONS */
+        .reveal {
+            opacity: 0; transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* MOBILE */
+        @media (max-width: 1024px) {
+            .markets-grid, .approach-grid { grid-template-columns: 1fr; }
+            .hero-metrics { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex; flex-direction: column; position: absolute;
+                top: 72px; left: 0; right: 0; background: var(--gray-950);
+                padding: 24px 32px; gap: 20px; border-bottom: 1px solid rgba(255,255,255,0.05);
+            }
+            .nav-toggle { display: block; }
+            section { padding: 80px 20px; }
+            .services-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; gap: 48px; }
+            .form-row { grid-template-columns: 1fr; }
+            .hero-metrics { grid-template-columns: 1fr 1fr; }
+            .exp-item { grid-template-columns: 1fr; gap: 8px; }
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <div class="nav-inner">
+        <a href="#" class="nav-logo">zorian<span>.</span>halan</a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#markets">Markets</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#approach">Approach</a></li>
+            <li><a href="#experience">Background</a></li>
+            <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <span></span><span></span><span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-bg">
+        <div class="grid-overlay"></div>
+        <div class="glow-1"></div>
+        <div class="glow-2"></div>
+    </div>
+    <div class="hero-inner">
+        <div class="hero-badge">
+            <span class="dot"></span>
+            Available for consulting engagements
+        </div>
+        <h1>Health Tech Consulting<br>with <span class="gradient">Clinical Depth</span></h1>
+        <p class="hero-sub">
+            I help health tech companies build products that actually work for clinicians.
+            30+ years of hands-on medical practice turned into domain expertise
+            for teams shipping healthcare software in the US, EU, and Hong Kong.
+        </p>
+        <div class="hero-actions">
+            <a href="#contact" class="btn btn-primary">
+                Start a Conversation
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </a>
+            <a href="#services" class="btn btn-ghost">View Services</a>
+        </div>
+        <div class="hero-metrics">
+            <div class="metric">
+                <div class="metric-value">30+</div>
+                <div class="metric-label">Years in Clinical Practice</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">2,000+</div>
+                <div class="metric-label">Patients Treated</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">3</div>
+                <div class="metric-label">Regulatory Markets</div>
+            </div>
+            <div class="metric">
+                <div class="metric-value">5+</div>
+                <div class="metric-label">Health Tech Projects</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MARKETS -->
+<section id="markets" class="markets">
+    <div class="container">
+        <div class="markets-header">
+            <div class="section-tag">Markets</div>
+            <h2 class="section-title">Cross-Border Health Tech Expertise</h2>
+            <p class="section-desc">Navigating regulatory landscapes and clinical workflows across the world's most demanding healthcare markets.</p>
+        </div>
+        <div class="markets-grid">
+            <div class="market-card reveal">
+                <div class="market-flag">&#127482;&#127480;</div>
+                <h3>United States</h3>
+                <p>Domain consulting for health tech products targeting the US market &mdash; from FDA-regulated SaMD to EHR integrations and HIPAA-compliant platforms.</p>
+                <div class="market-tags">
+                    <span>FDA / SaMD</span>
+                    <span>HIPAA</span>
+                    <span>EHR/EMR</span>
+                    <span>HL7 / FHIR</span>
+                </div>
+            </div>
+            <div class="market-card reveal">
+                <div class="market-flag">&#127466;&#127482;</div>
+                <h3>European Union</h3>
+                <p>Clinical domain expertise for CE-marked medical devices and health platforms complying with MDR, GDPR, and EU Digital Health regulations.</p>
+                <div class="market-tags">
+                    <span>MDR / IVDR</span>
+                    <span>GDPR</span>
+                    <span>CE Marking</span>
+                    <span>EHDS</span>
+                </div>
+            </div>
+            <div class="market-card reveal">
+                <div class="market-flag">&#127469;&#127472;</div>
+                <h3>Hong Kong</h3>
+                <p>Health IT consulting for dental and medical technology ventures in the Hong Kong market, including MDCO registration and clinical validation.</p>
+                <div class="market-tags">
+                    <span>MDCO</span>
+                    <span>eHealth</span>
+                    <span>DH Regulation</span>
+                    <span>Clinical Validation</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services" class="services">
+    <div class="container">
+        <div class="section-tag">Services</div>
+        <h2 class="section-title">What I Do</h2>
+        <p class="section-desc">Complex consulting at the intersection of clinical practice and health tech product development.</p>
+        <div class="services-grid">
+            <div class="service-card reveal">
+                <div class="service-num">01</div>
+                <h3>Clinical Domain Consulting</h3>
+                <p>Translating real-world clinical workflows into product requirements. I work embedded with engineering teams to ensure your health tech product reflects how medicine actually works &mdash; not how it looks on paper.</p>
+                <div class="service-stack">
+                    <span>Product Requirements</span>
+                    <span>Clinical Workflows</span>
+                    <span>UX Validation</span>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-num">02</div>
+                <h3>Dental Digital Technology Advisory</h3>
+                <p>Expert guidance on digital dentistry platforms, CAD/CAM integration, and dental practice management software. 26+ years of dental tech experience applied to product strategy.</p>
+                <div class="service-stack">
+                    <span>CAD/CAM</span>
+                    <span>Digital Workflows</span>
+                    <span>Practice Management</span>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-num">03</div>
+                <h3>Health IT Implementation Strategy</h3>
+                <p>End-to-end advisory for deploying healthcare software in clinical settings. From change management to clinician onboarding, I ensure your product gets adopted &mdash; not just installed.</p>
+                <div class="service-stack">
+                    <span>Change Management</span>
+                    <span>Staff Training</span>
+                    <span>Adoption Strategy</span>
+                </div>
+            </div>
+            <div class="service-card reveal">
+                <div class="service-num">04</div>
+                <h3>Cross-Market Regulatory Navigation</h3>
+                <p>Domain expertise for health tech teams navigating multiple regulatory environments. I help bridge clinical requirements across US, EU, and Asian markets for faster go-to-market.</p>
+                <div class="service-stack">
+                    <span>Regulatory Strategy</span>
+                    <span>Market Entry</span>
+                    <span>Clinical Evidence</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- APPROACH -->
+<section id="approach" class="approach">
+    <div class="container">
+        <div class="section-tag">How I Work</div>
+        <h2 class="section-title">My Approach</h2>
+        <p class="section-desc">I embed directly with your product and engineering team &mdash; not from a slide deck, but from the codebase and the clinic.</p>
+        <div class="approach-grid">
+            <div class="approach-item reveal">
+                <div class="approach-num">01</div>
+                <h3>Discover</h3>
+                <p>Deep-dive into your product, clinical context, and target market. I map out gaps between what your software does and what clinicians actually need.</p>
+            </div>
+            <div class="approach-item reveal">
+                <div class="approach-num">02</div>
+                <h3>Advise</h3>
+                <p>Deliver actionable domain insights: workflow models, clinical validation plans, regulatory considerations, and UX recommendations grounded in practice.</p>
+            </div>
+            <div class="approach-item reveal">
+                <div class="approach-num">03</div>
+                <h3>Embed</h3>
+                <p>Work alongside your team through implementation. Review specs, validate features, train staff, and ensure the product works in the real clinical environment.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" class="experience">
+    <div class="container">
+        <div class="section-tag">Background</div>
+        <h2 class="section-title">Professional History</h2>
+        <p class="section-desc">Three decades at the intersection of healthcare and technology.</p>
+        <div class="exp-list">
+            <div class="exp-item reveal">
+                <div class="exp-date">2022 &mdash; Present<div class="current">Active</div></div>
+                <div class="exp-content">
+                    <h3>Healthcare IT Expert</h3>
+                    <div class="org">Self Employed &bull; Lviv, Ukraine</div>
+                    <p>Domain consulting for health tech product teams. Bridging clinical expertise with software development across US, EU, and Asian markets.</p>
+                </div>
+            </div>
+            <div class="exp-item reveal">
+                <div class="exp-date">2021 &mdash; Present<div class="current">Active</div></div>
+                <div class="exp-content">
+                    <h3>Dental Digital Technology Adviser</h3>
+                    <div class="org">Self Employed &bull; Lviv, Ukraine</div>
+                    <p>Advisory on dental tech integration, digital workflow design, and CAD/CAM solutions for dental software companies.</p>
+                </div>
+            </div>
+            <div class="exp-item reveal">
+                <div class="exp-date">2020 &mdash; Present<div class="current">Active</div></div>
+                <div class="exp-content">
+                    <h3>Healthcare Training Content Creator</h3>
+                    <div class="org">Freelance</div>
+                    <p>Developing clinical training programs and educational content for healthcare technology adoption.</p>
+                </div>
+            </div>
+            <div class="exp-item reveal">
+                <div class="exp-date">2000 &mdash; Present</div>
+                <div class="exp-content">
+                    <h3>Senior Dental Technician</h3>
+                    <div class="org">Self Employed &bull; Lviv, Ukraine</div>
+                    <p>26+ years of hands-on dental practice. 2,000+ patients treated. Deep expertise in clinical workflows and patient care.</p>
+                </div>
+            </div>
+            <div class="exp-item reveal">
+                <div class="exp-date">1995 &mdash; 2004</div>
+                <div class="exp-content">
+                    <h3>Public Health Dentist</h3>
+                    <div class="org">Lviv City Clinical Hospital #4</div>
+                </div>
+            </div>
+            <div class="exp-item reveal">
+                <div class="exp-date">1988 &mdash; 1995</div>
+                <div class="exp-content">
+                    <h3>Public Health Dentist</h3>
+                    <div class="org">Busk Regional Hospital &bull; Lviv Oblast</div>
+                </div>
+            </div>
+        </div>
+        <div style="margin-top: 32px; font-size: 0.88rem; color: var(--gray-500);">
+            Education: <span style="color: var(--gray-300);">Lviv National Medical University 'Danylo Halycky'</span>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-tag">Contact</div>
+        <h2 class="section-title">Let's Talk</h2>
+        <p class="section-desc">Building a health tech product and need clinical domain expertise? Let's explore how I can help your team.</p>
+        <div class="contact-grid">
+            <div class="reveal">
+                <div class="contact-info">
+                    <p>I work with health tech startups, digital health companies, and medical device teams who need a practitioner's perspective baked into their product &mdash; not bolted on after launch.</p>
+                </div>
+                <ul class="contact-links">
+                    <li>
+                        <div class="icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <span class="text">Lviv, Ukraine <span style="color:var(--gray-600)">&mdash; working globally & remote</span></span>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <span class="text"><a href="mailto:zorjangalan@gmail.com">zorjangalan@gmail.com</a></span>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                        </div>
+                        <span class="text"><a href="https://www.linkedin.com/in/zorian-halan/" target="_blank" rel="noopener">linkedin.com/in/zorian-halan</a></span>
+                    </li>
+                </ul>
+                <div class="legal-block">
+                    <h4>Legal Entity</h4>
+                    <p>
+                        <strong style="color:var(--gray-300)">Zorian Halan</strong>, Private Entrepreneur<br>
+                        Registered under the laws of Ukraine<br>
+                        Reg. No: 2405907196<br>
+                        79004, Lvivska Oblast, Lviv, Povstanska 3A, apt. 15
+                    </p>
+                </div>
+            </div>
+            <div class="reveal">
+                <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify>
+                    <input type="hidden" name="form-name" value="contact">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" name="name" placeholder="Your name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="you@company.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company / Project</label>
+                        <input type="text" id="company" name="company" placeholder="Company name or project">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">How can I help?</label>
+                        <textarea id="message" name="message" placeholder="Tell me about your health tech project and what domain expertise you need..." required></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2026 Zorian Halan &bull; Private Entrepreneur, Reg. #2405907196 &bull; Lviv, Ukraine</p>
+</footer>
+
+<script>
+// Nav
+const nav = document.querySelector('nav');
+window.addEventListener('scroll', () => nav.style.borderBottomColor = window.scrollY > 10 ? 'rgba(255,255,255,0.08)' : 'rgba(255,255,255,0.05)');
+document.getElementById('navToggle').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+document.querySelectorAll('.nav-links a').forEach(a => a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open')));
+
+// Reveal on scroll
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }});
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>

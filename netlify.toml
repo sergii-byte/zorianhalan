@@ -1,5 +1,5 @@
 [build]
-  publish = "fligenair"
+  publish = "."
   command = "echo 'build complete'"
 
 [build.processing]
