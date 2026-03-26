@@ -680,7 +680,7 @@
         <div class="section-tag">Extended Network</div>
         <h2 class="section-title">Cross-Expertise on Demand</h2>
         <p class="section-desc">For projects that go beyond clinical domain consulting, I collaborate with a vetted network of senior IT specialists from Ukraine and across the globe.</p>
-        <div class="services-grid" style="grid-template-columns: repeat(3, 1fr);">
+        <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
             <div class="service-card reveal">
                 <div class="service-num">AI</div>
                 <h3>Machine Learning & AI</h3>
@@ -805,8 +805,11 @@
                 </div>
             </div>
             <div class="reveal">
-                <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify>
-                    <input type="hidden" name="form-name" value="contact">
+                <form class="contact-form" action="https://formsubmit.co/zorjangalan@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="New inquiry from zorianhalan.com">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_honey" style="display:none">
                     <div class="form-row">
                         <div class="form-group">
                             <label for="name">Name</label>
